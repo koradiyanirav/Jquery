@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .hi6, .hi7 {
+        width: 450px;
+        /* height: 450px; */
+        background-color: red;
+    }
+    
+    .hi8{
+          width: 450px;
+          height: 450px;
+          background-color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <p id="hi1">
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima, natus.
+    </p>
+    <p id="hi2">Lorem ipsum dolor sit amet.</p>
+    <div id="hi">
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci
+      numquam, molestiae non dicta dignissimos eum aut dolorem nisi praesentium
+      earum, minus, ab tempore libero. Vitae molestias eum veniam quo nisi,
+      voluptatibus nihil quas assumenda odio est nemo, ratione minus blanditiis,
+      non totam temporibus. Sit ipsa necessitatibus, vel suscipit natus dolores!
+    </div>
+    <br /><br /><br />
+    <div id="hi4">
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci
+      numquam, molestiae non dicta dignissimos eum aut dolorem nisi praesentium
+      earum, minus, ab tempore libero. Vitae molestias eum veniam quo nisi,
+      voluptatibus nihil quas assumenda odio est nemo, ratione minus blanditiis,
+      non totam temporibus. Sit ipsa necessitatibus, vel suscipit natus dolores!
+    </div>
+    <br /><br /><br />
+    <div id="hi5">
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci
+      numquam, molestiae non dicta dignissimos eum aut dolorem nisi praesentium
+      earum, minus, ab tempore libero. Vitae molestias eum veniam quo nisi,
+      voluptatibus nihil quas assumenda odio est nemo, ratione minus blanditiis,
+      non totam temporibus. Sit ipsa necessitatibus, vel suscipit natus dolores!
+    </div>
+    <br /><br />
+    <div class="hi6"></div>
+    <br /><br /><br /><br />
+    <div class="hi7"></div>
+    <br /><br /><br /><br />
+    <button type="submit" id="btn">Animation</button>
+    <br /><br />
+    <button type="submit" class="btn">Close</button>
+    <br /><br />
+    <button type="submit" class="btn1">Next</button>
+    <br /><br />
+    <button type="submit" class="btn2">Preives</button>
+  </body>
+  <script src="jquery-3.6.1.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $("#hi1").click(function () {
+        alert("you Lorem ipsum dolor sit.");
+      });
+      $("#btn").click(function () {
+        $("#hi").fadeOut(8000);
+      });
+
+      $("#btn").dblclick(function () {
+        $("#hi").fadeIn(5000);
+        $(".btn").click(function () {});
+        $("#hi4").fadeOut(8000);
+      });
+      $(".btn").mouseenter(function () {
+        $("#hi4").fadeTo("slow", 0.45);
+      });
+      $(".btn").mouseout(function () {
+        $("#hi4").fadeToggle(4000);
+      });
+      //   $(".btn1").mouseleave(function () {
+      //     $("#hi5").slideDown(4000);
+      //   });
+      //   $(".btn1").mousedown(function () {
+      //     $("#hi5").slideUp(4000);
+      //   });
+      //   $(".btn1").mouseup(function () {
+      //     $("#hi5").slideToggle(4000);
+      //   });
+      //   $(".btn1").dblclick(function () {
+      //     $("#hi5").animate({ opacity: 0.5 }, 4000);
+      //   });
+        // $(".btn1").click(function () {
+        //   $("div").animate({ height: "+=150px",
+        //   widht: '+=150px',},5000);
+        // });
+        $(".btn1").click(function () {
+        $('div').toggleClass("hi8")
+        });
+      //   $(".btn1").dblclick(function () {
+      //     $(".hi6").animate({
+      //       left: "250px",
+      //       opacity: "0.5",
+      //       height: "200px",
+      //       widht: "500px",
+      //     });
+      //   });
+    //   $(".btn2").click(function () {
+    //     $("div").animate({
+    //       left: "250px",
+    //       height: "+=150px",
+    //       width: "+=150px",
+    //     });
+    //   });
+    //   $(".btn2").mouseleave(function () {
+    //     $("div").animate({
+    //       left: "250px",
+    //       height: "-=150px",
+    //       width: "-=150px",
+    //     });
+    //   });
+    });
+  </script>
+</html>
