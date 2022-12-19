@@ -1,114 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- <link href="/dist/output.css" rel="stylesheet" /> -->
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Twitter</title>
-  </head>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-  <link
-    rel="stylesheet"
-    href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css"
-  />
-  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script> -->
-  <body>
-    <!-- <div id="root"></div> -->
-    <!-- <script type="module" src="/src/main.jsx"></script> -->
+  <!-- <link href="/dist/output.css" rel="stylesheet" /> -->
 
-    <form id="form" action="https://reqres.in/api/register" method="post">
-      <!-- <label for="fname">First Name</label>
-      <input type="text" id="fname" name="fname" /><br />
+  <title>Twitter</title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" />
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script> -->
 
-      <label for="lname">Last Name</label>
-      <input type="text" id="lname" name="lname" /><br /> -->
+<body>
+  <!-- <div id="root"></div> -->
+  <!-- <script type="module" src="/src/main.jsx"></script> -->
 
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" /><br />
+  <form id="form" action="https://reqres.in/api/register" method="post">
+    <label for="fname">First Name</label>
+    <input type="text" id="fname" name="fname" /><br /><br>
 
-      <!-- <label for="dob">Date of Birth</label>
-      <input type="date" id="dob" name="dob" /><br />
+    <label for="lname">Last Name</label>
+    <input type="text" id="lname" name="lname" /><br /><br>
 
-      <label for="mobileNo">Mobile Number</label>
-      <input type="phone" id="mobileNo" name="mobileNo" /><br /> -->
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" /><br /><br>
 
-      <label for="password">Password</label>
-      <input type="password" id="password" name="password" /><br />
+    <label for="dob">Date of Birth</label>
+    <input type="date" id="dob" name="dob" /><br /><br>
 
-      <input type="submit" />
-    </form>
-    <table id="marutable">
-      <thead>
-        <th>ID</th>
-        <th>Email</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Avatar</th>
-      </thead>
-      <tbody id="tbodyid"></tbody>
-    </table>
-  </body>
-  <script>
-    var form = $("#form");
-    form.submit(function (e) {
-      e.preventDefault();
-      var formData = {
-        // fname: $("#fname").val(),
-        // lname: $("#lname").val(),
-        email: $("#email").val(),
-        // dob: $("#dob").val(),
-        // mobileNo: $("#mobileNo").val(),
-        password: $("#password").val(),
-      };
-      console.log(formData);
+    <label for="mobileNo">Mobile Number</label>
+    <input type="phone" id="mobileNo" name="mobileNo" /><br /><br>
 
-      //   $.ajax({
-      //     type: "POST",
-      //     url: "https://reqres.in/api/register",
-      //     data: formData,
-      //     success: function (data) {
-      //       console.log("success: ", data);
-      //     },
-      //     error: function (error) {
-      //       console.log(error.responseJSON);
-      //     },
-      //   });
-    });
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" /><br /><br>
 
-    var trstring = "";
+    <input type="submit" />
+  </form>
+  <table id="marutable">
+    <thead>
+      <th>ID</th>
+      <th>Email</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Avatar</th>
+    </thead>
+    <tbody id="tbodyid"></tbody>
+  </table>
+</body>
+<script>
+  var form = $("#form");
+  form.submit(function (e) {
+    e.preventDefault();
+    var formData = {
+      fname: $("#fname").val(),
+      lname: $("#lname").val(),
+      email: $("#email").val(),
+      dob: $("#dob").val(),
+      mobileNo: $("#mobileNo").val(),
+      password: $("#password").val(),
+    };
+    console.log(formData);
+
     $.ajax({
-      url: "https://reqres.in/api/users",
-      type: "get",
+      type: "POST",
+      url: "https://reqres.in/api/register",
+      data: formData,
       success: function (data) {
-        // console.log("success", data);
-        var users = data["data"];
-        for (var i = 0; i < users.length; i++) {
-          //   console.log(users[i]);
-          trstring += `<tr>
+        console.log("success: ", data);
+      },
+      error: function (error) {
+        console.log(error.responseJSON);
+      },
+    });
+  });
+
+  var trstring = "";
+  $.ajax({
+    url: "https://reqres.in/api/users",
+    type: "get",
+    success: function (data) {
+      // console.log("success", data);
+      var users = data["data"];
+      for (var i = 0; i < users.length; i++) {
+        //   console.log(users[i]);
+        trstring += `<tr>
             <td>${users[i].id}</td>
             <td>${users[i].email}</td>
             <td>${users[i].first_name}</td>
             <td>${users[i].last_name}</td>
             <td><img src="${users[i].avatar}" alt="Image not found!"/> </td>
             </tr>`;
-          console.log(trstring);
-        }
-        $("#tbodyid").html(trstring);
-      },
-      error: function (error) {
-        console.log(error.responseJSON);
-      },
-    });
+        console.log(trstring);
+      }
+      $("#tbodyid").html(trstring);
+    },
+    error: function (error) {
+      console.log(error.responseJSON);
+    },
+  });
 
-    var loginuser = {
-      email: "eve.holt@reqres.in",
-      password: "pistol",
-    };
+  var loginuser = {
+    email: "eve.holt@reqres.in",
+    password: "pistol",
+  };
 
-    $("#email").val(loginuser.email);
-    $("#password").val(loginuser.password);
-  </script>
+  $("#email").val(loginuser.email);
+  $("#password").val(loginuser.password);
+</script>
+
 </html>
