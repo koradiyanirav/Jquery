@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Api</title>
+    <script src="jquery-3.6.1.min.js"></script>
+</head>
+<body>
+    <form method="post" id="form">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email"><br><br>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password"><br><br>
+        <button type="submit">Login</button>
+    </form>
+</body>
+<script>
+    var form = $('#form');
+
+    form.submit(function(e){
+        e.preventDefault();
+        var formData = {
+          email: $('#email').val(),
+          password: $('#password').val()
+        } 
+        $.ajax({
+            type: "POST",
+            url: "https://reqres.in/api/login",
+            data: formData,
+            success: function(data){
+                console.log(data)
+            },
+            error: function(error){
+                console.log(error.responseJSON);
+            }
+        })
+    });
+</script>
+</html>

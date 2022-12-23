@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery-3.6.1.min.js"></script>
+</head>
+
+<body>
+        <table>
+            <thead>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Year</th>
+                <th>Color</th>
+                <th>Pantone Value</th>
+            </thead>
+
+            <tbody id="tablebody"></tbody>
+        </table>
+    </body>
+<script>
+    $.ajax({
+        type: "get",
+        url: 'https://reqres.in/api/unknown',
+        success: function (preload) {
+            var data = preload["data"];
+            console.log(data)
+            var dataload = "";
+            for(var i = 0;i < data.length; i++){
+                dataload += `<tr>
+                    <td>${data[i].id}</td>
+                    <td>${data[i].name}</td>
+                    <td>${data[i].year}</td>
+                    <td>${data[i].color}</td>
+                    <td>${data[i].pantone_value}</td>
+                    </tr>`
+                    console.log(dataload)
+            }
+            $("#tablebody").html(dataload); 
+        }
+    });
+</script>
+
+</html>
