@@ -1,12 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form Get Api</title>
+    <script src="jquery-3.6.1.min.js"></script>
 </head>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" /> -->
+
 <body>
-    
+    <form method="post" id="form">
+        <label for="id">ID:</label>
+        <input type="id" name="id" id="id"><br><br>
+
+        <label for="fname">First Name:</label>
+        <input type="text" name="fname" id="fname"><br><br>
+
+        <label for="lname">Last Name:</label>
+        <input type="text" name="lname" id="lname"><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email"><br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password"><br><br>
+
+        <button type="submit" onclick="dataUpdate()">Submit</button>
+    </form>
+    <table id="marutable">
+        <thead>
+            <th>ID</th>
+            <th>Email</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Avatar</th>
+        </thead>
+        <tbody id="tablebody"></tbody>
+    </table>
 </body>
+<script>
+    var form = $("#form");
+    form.submit(function (e) {
+        e.preventDefault();
+        var formData = {
+            id: $("#id").val(),
+            fname: $("#fname").val(),
+            lname: $("#lname").val(),
+            email: $("#email").val(),
+            password: $("#password").val(),
+        };
+        console.log(formData);
+
+        $.ajax({
+            type: "post",
+            data: formData,
+            url: "https://reqres.in/api/users?page",
+            success: function (data) {
+                console.log("success:", data);
+            },
+            error: function (error) {
+                console.log(error.responseJSON)
+            }
+        })
+    });
+
+    var dataload = '';
+    $.ajax({
+        type: "get",
+        url: "https://reqres.in/api/users",
+        success: function (preload) {
+            console.log("success:", preload)
+            var users = preload["data"];
+            for (var i = 0; i < users.length; i++) {
+                // console.log(users[i]);
+                dataload += `<tr onclick="userClick(${users[i].id})">
+                    <td>${users[i].id}</td>
+                    <td>${users[i].email}</td>
+                    <td>${users[i].first_name}</td>
+                    <td>${users[i].last_name}</td>
+                    <td><img src="${users[i].avatar}" alt="image not found!" /></td>
+                    <td><button onclick="deleteUser(${users[i].id})">Delete</button></td>
+                    </tr>`
+                // console.log(dataload)
+            };
+            $("#tablebody").html(dataload);
+        },
+    });
+
+    function userClick(id) {
+        console.log("function called", "https://reqres.in/api/users/" + id)
+        $.ajax({
+            type: "get",
+            url: "https://reqres.in/api/users/" + id,
+            success: function (payload) {
+                console.log("success:",payload);
+                var data = payload.data;
+                $("#id").val(data.id);
+                $("#email").val(data.email);
+                $("#fname").val(data.first_name);
+                $("#lname").val(data.last_name);
+            },
+            error: function (error) {
+                console.log(error.responseJSON)
+            }
+        })
+    }
+
+    function dataUpdate() {
+        console.log("Called")
+        var formData = {
+            id: $("#id").val(),
+            email: $("#email").val(),
+            fname: $("#fname").val(),
+            lname: $("#lname").val(),
+        }
+        console.log("https://reqres.in/api/users/" + $("#id").val());
+
+        $.ajax({
+            type: "patch",
+            data: formData,
+            url: "https://reqres.in/api/users/" + $("#id").val(),
+            success: function (data) {
+                console.log(data)
+            },
+            error: function (error) {
+                console.log(error.responseJSON);
+            },
+        })
+
+    }
+
+
+    function deleteUser(id) {
+        console.log(id)
+        $.ajax({
+            type: "delete",
+            url: "https://reqres.in/api/users/" + id,
+            success: function(data){
+                alert(data);
+            },
+            error: function(error){
+                console.log(error.responseJSON)
+            },
+        })
+    }
+</script>
+
 </html>
