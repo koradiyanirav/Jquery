@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="jquery-3.6.1.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Electronics Shop</title>
+</head>
+<style>
+    tbody {
+        display: grid;
+        grid-template-columns: auto auto auto auto;
+    }
+
+    tr {
+        text-align: center;
+        display: grid;
+    }
+</style>
+
+<body>
+    <form method="post" id="form">
+        <label for="id">Id</label>
+        <input type="id" id="id" name="id"><br><br>
+
+        <label for="fname">First Name</label>
+        <input type="text" id="fname" name="fname"><br><br>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email"><br><br>
+
+        <label for="password">Password</label>
+        <input type="password" id="password"><br><br>
+
+        <button>Submit</button>
+    </form>
+    <table id="mytable">
+        <!-- <thead>
+            <th>First Name</th>
+            <th>Email</th>
+            <th>Aavtar</th>
+        </thead> -->
+        <tbody id="tbodyid"></tbody>
+    </table>
+</body>
+<script>
+    var form = $("#form");
+
+    form.submit(function (e) {
+        e.preventDefault();
+        var formData = {
+            id: $("#id").val(),
+            fname: $("#fname").val(),
+            email: $("#email").val(),
+            password: $("#password").val(),
+        }
+        $.ajax({
+            type: "post",
+            data: formData,
+            url: "https://reqres.in/api/login",
+            success: function (data) {
+                Swal.fire(
+                    'Success!',
+                    'User created successfully!',
+                    'success'
+                )
+            },
+            error: function (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                })
+            }
+        })
+    });
+
+    $.ajax({
+        type: "get",
+        url: "https://reqres.in/api/users/",
+        success: function (preload) {
+            var data = preload["data"];
+            console.log(data)
+            var tostring = "";
+            for (var i = 0; i < data.length; i++) {
+                tostring += `<tr>
+                    <td><b>${data[i].first_name}</b></td>
+                    <td>${data[i].email}</td>
+                    <td><img src="${data[i].avatar}"></td>
+                    </tr>`
+            }
+            $("#tbodyid").html(tostring)
+        },
+    })
+
+</script>
+
+</html>

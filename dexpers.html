@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="jquery-3.6.1.min.js"></script>
+    <title>Discover</title>
+</head>
+<style>
+    body{
+        margin: 0px;
+        padding: 0px;
+        font-family: Source Sans Pro,sans-serif;
+        background-color: rgba(56,58,71,1);
+    }
+
+    #contenier{
+        width: 75%!important;
+        margin: auto!important;
+    }
+
+    #contain{
+        font-weight: 400;
+        padding-top: 20px;
+        color: rgba(255, 255, 255, 1);
+        font-size: 24px;
+    }
+
+    #contain-item{
+        margin: 0px;
+    }
+
+    #dollar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1.3px solid;
+        border-image: linear-gradient(90deg,#57596b,#47495c) 1 stretch;
+        padding-left: 25px;
+        padding-right: 25px;
+        color: rgba(152, 163, 198, 1);
+    }
+
+    h5{
+        font-weight: 500;
+        font-size: 14px;
+    }
+    
+    #main-item{
+        display: grid;
+        grid-template-columns: auto auto;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1.3px solid;
+        border-image: linear-gradient(90deg,#57596b,#47495c) 1 stretch;
+        height: 80px;
+        color: rgba(255, 255, 255, 1);
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    #money {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #image{
+        width: 50px;
+    }
+
+    #name{
+        font-size: 14px;
+        color: rgba(255, 255, 255, 1);
+    }
+
+    #symbol{
+        text-transform: uppercase;
+        font-size: 14px;
+        color: rgba(152, 163, 198, 1);
+    }
+     
+    #item{
+        display: flex;
+        flex-direction: column;
+        line-height: 1.5;
+    }
+
+    #currency{
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    img {
+        width: 24px;
+        height: 24px;
+    }
+</style>
+
+<body>
+    <div id="contenier">
+        <div id="contain">
+            <p id="contain-item">Top Cryptos by Marketcap</p>
+        </div>
+                    <div id="dollar">
+                            <h5>Name</h5>
+                            <h5>Market cap</h5>
+                    </div>
+                <div id="main">
+                </div>
+    </div>
+</body>
+<script>
+    $.ajax({
+        type: "get",
+        url: "https://api.exwhere.com/coins/?page=1",
+        success: function (preload) {
+            var data = preload["results"];
+            var crypto = '';
+            for (var i = 1; i < data.length; i++) {
+                crypto += `<div id="main-item"><div id='money'>
+                <div id="image"><img src='${data[i].image}'></div>
+                <div id="item">  
+                <div id="name">${data[i].name}</div>
+                <div id="symbol">${data[i].symbol}</div>
+                </div>
+                </div>
+                <div id='currency'>
+                    <div id="market-cap">${data[i].market_cap}</div>
+                    </div></div>`
+            }
+            $("#main").html(crypto)
+        }
+    })
+</script>
+
+</html>
