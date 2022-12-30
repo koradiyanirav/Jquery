@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="jquery-3.6.1.min.js"></script>
+    <title>Where to Buy Bitcoin (BTC) | Bitcoin Price History | Exwhere</title>
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: rgba(56, 58, 71, 1);
+        font-family: Source Sans Pro, sans-serif;
+        color: white;
+    }
+
+    #btc_container {
+        width: 75%;
+        margin: auto;
+        line-height: 24px;
+        font-size: 15.2px;
+    }
+
+    #btc {
+        padding-top: 40px;
+    }
+
+    #btc_item_one {
+        text-decoration: none;
+        color: rgba(255, 255, 255, 1);
+    }
+
+    #btc_item_one:hover{
+        color: #8dadfc;
+    }
+
+    #btc_item_two {
+        color: rgba(152, 163, 198, 1);
+        text-decoration: none;
+    }
+
+    #btc_item_three {
+        color: rgba(255, 255, 255, 1);
+        font-size: 24px;
+        line-height: 36px;
+        font-weight: 400;
+        padding-top: 40px;
+    }
+
+    #btc_table {
+        padding-top: 40px;
+    }
+
+    #btctable {
+        display: block;
+    }
+
+    #bitcoin {
+        display: flex;
+        padding-left: 24px;
+        padding-right: 24px;
+        margin-bottom: 24px;
+    }
+
+    #bitcoin_bar {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        font-size: 16px;
+        line-height: 24px;
+        color: rgba(152, 163, 198, 1);
+    }
+
+    #bitcoin_bar, th{
+        font-weight: 300;
+    }
+
+    #btc_table_item {
+        display: block;
+    }
+    
+    #bitCoin {
+        background-color: rgba(64, 66, 79, 1);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-left: 24px;
+        padding-right: 24px;
+        height: 80px;
+        border-bottom: 1px solid rgba(71,73,92,1);
+        cursor: pointer;
+    }
+
+    #bitCoin:hover{
+        background: linear-gradient(90deg,#57596b,#47495c);
+    }
+
+    #Bitcoin{
+        display: flex;
+        align-items: center;
+        width: 33.333%;
+    }
+
+    div:nth-child(1){
+        margin-right: 16px;
+    }
+
+    #btc_symbol {
+        width: 33.333%;
+        text-align: center;
+        font-size: 14px;
+        line-height: 21px;
+        color: rgba(141,173,252, 1);
+    }
+
+    #btc_volume{
+        font-size: 14px;
+        line-height: 21px;
+        width: 33.333%;
+        text-align: right;
+    }
+
+    #btc_image{
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+    }
+
+    #btc_name {
+        font-weight: 300;
+        line-height: 21px;
+    }
+
+</style>
+
+<body>
+    <div id="btc_container">
+        <div id="btc">
+            <a href="#" id="btc_item_one">home</a>
+            <a href="#" id="btc_item_two"> / buy Bitcoin (BTC)</a>
+        </div>
+        <h1 id="btc_item_three">Where to Buy Bitcoin (BTC)</h1>
+        <div id="btc_table">
+            <table id="btctable">
+                <thead id="bitcoin">
+                    <tr id="bitcoin_bar">
+                        <th>Exchange</th>
+                        <th>Pair</th>
+                        <th>Volume (24h)</th>
+                    </tr>
+                </thead>
+                <tbody id="btc_table_item"></tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+<script>
+    $.ajax({
+        type: "get",
+        url: "https://api.exwhere.com/crypto/?skip=0&limit=25&symbol=btc",
+        success: function (preload) {
+            var bitcoin = preload["data"]["spot_market_pairs"];
+            // console.log(bitcoin);
+            var crypto = "";
+            for (var i = 0; i < bitcoin.length; i++) {
+                crypto += `<tr id="bitCoin">
+                    <td id="Bitcoin">
+                    <div><img id="btc_image" src="${bitcoin[i].market_logo}"></div>
+                    <div id="btc_name">${bitcoin[i].market_name}</div></td>
+                    <td id="btc_symbol">${bitcoin[i].base_coin_symbol}/${bitcoin[i].target_coin_symbol}</td>
+                    <td id="btc_volume">${bitcoin[i].volume}</td>
+                    </tr>`
+                // console.log(crypto)
+            }
+            $("#btc_table_item").html(crypto)
+            $("#bitCoin").click()
+        },
+    })
+</script>
+
+</html>

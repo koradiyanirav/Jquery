@@ -6,29 +6,36 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="jquery-3.6.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
     <title>Discover</title>
 </head>
 <style>
-    body{
+    body {
         margin: 0px;
         padding: 0px;
-        font-family: Source Sans Pro,sans-serif;
-        background-color: rgba(56,58,71,1);
+        font-family: Source Sans Pro, sans-serif;
+        background-color: rgba(56, 58, 71, 1);
     }
 
-    #contenier{
-        width: 75%!important;
-        margin: auto!important;
+    #contenier {
+        width: 75% !important;
+        margin: auto !important;
     }
 
-    #contain{
+    #myTable {
+        width: 100%;
+    }
+
+    #contain {
         font-weight: 400;
         padding-top: 20px;
         color: rgba(255, 255, 255, 1);
         font-size: 24px;
     }
 
-    #contain-item{
+    #contain-item {
         margin: 0px;
     }
 
@@ -36,25 +43,34 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+    }
+
+    #dollar-item {
+        height: 64px;
+        margin-top: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         border-bottom: 1.3px solid;
-        border-image: linear-gradient(90deg,#57596b,#47495c) 1 stretch;
+        border-image: linear-gradient(90deg, #57596b, #47495c) 1 stretch;
         padding-left: 25px;
         padding-right: 25px;
         color: rgba(152, 163, 198, 1);
+        width: 100%;
     }
 
-    h5{
+    #h5 {
         font-weight: 500;
         font-size: 14px;
     }
-    
-    #main-item{
+
+    #main-item {
         display: grid;
         grid-template-columns: auto auto;
         justify-content: space-between;
         align-items: center;
         border-bottom: 1.3px solid;
-        border-image: linear-gradient(90deg,#57596b,#47495c) 1 stretch;
+        border-image: linear-gradient(90deg, #57596b, #47495c) 1 stretch;
         height: 80px;
         color: rgba(255, 255, 255, 1);
         padding-left: 24px;
@@ -68,28 +84,28 @@
         justify-content: center;
     }
 
-    #image{
+    #image {
         width: 50px;
     }
 
-    #name{
+    #name {
         font-size: 14px;
         color: rgba(255, 255, 255, 1);
     }
 
-    #symbol{
+    #symbol {
         text-transform: uppercase;
         font-size: 14px;
         color: rgba(152, 163, 198, 1);
     }
-     
-    #item{
+
+    #item {
         display: flex;
         flex-direction: column;
         line-height: 1.5;
     }
 
-    #currency{
+    #currency {
         font-size: 14px;
         line-height: 1.5;
     }
@@ -105,34 +121,39 @@
         <div id="contain">
             <p id="contain-item">Top Cryptos by Marketcap</p>
         </div>
-                    <div id="dollar">
-                            <h5>Name</h5>
-                            <h5>Market cap</h5>
-                    </div>
-                <div id="main">
-                </div>
+        <table id="myTable">
+            <thead id="dollar">
+                <tr id="dollar-item">
+                    <th id="h5">Name</th>
+                    <th id="h5">Market cap</th>
+                </tr>
+            </thead>
+            <tbody id="main">
+            </tbody>
+        </table>
     </div>
 </body>
 <script>
     $.ajax({
         type: "get",
-        url: "https://api.exwhere.com/coins/?page=1",
+        url: "https://api.exwhere.com/coins/",
         success: function (preload) {
             var data = preload["results"];
             var crypto = '';
             for (var i = 1; i < data.length; i++) {
-                crypto += `<div id="main-item"><div id='money'>
+                crypto += `<tr id="main-item"><td id='money'>
                 <div id="image"><img src='${data[i].image}'></div>
                 <div id="item">  
                 <div id="name">${data[i].name}</div>
                 <div id="symbol">${data[i].symbol}</div>
                 </div>
-                </div>
-                <div id='currency'>
+                </td>
+                <td id='currency'>
                     <div id="market-cap">${data[i].market_cap}</div>
-                    </div></div>`
+                    </td></tr>`
             }
             $("#main").html(crypto)
+            $("#myTable").dataTable();
         }
     })
 </script>
