@@ -59,9 +59,65 @@
         width: 100%;
     }
 
+    #myTable_length{
+        color: rgba(152, 163, 198, 1);
+        font-weight: 300!important;
+        font-size: 14px;
+        line-height: 21px;
+        padding-top: 20px;
+    }
+    
+    #myTable_filter{
+        color: rgba(152, 163, 198, 1);
+        padding-top: 20px;
+        line-height: 21px;
+        font-weight: 300!important;
+        font-size: 14px;
+    }
+
+    #myTable_info{
+        color: rgba(152, 163, 198, 1);
+        padding-top: 20px;
+        line-height: 21px;
+        font-weight: 300!important;
+        font-size: 14px;
+    }
+
+    #myTable_paginate{
+        color: rgba(152, 163, 198, 1);
+        padding-top: 20px;
+        line-height: 21px;
+        font-weight: 300!important;
+        font-size: 14px;
+    }
+
+    .paginate_button:hover{
+        background: linear-gradient(90deg,#57596b,#47495c)!important;
+    }
+    
+    select{
+        color: rgba(152, 163, 198, 1);
+    }
+
     #h5 {
         font-weight: 500;
         font-size: 14px;
+        border: none;
+    }
+
+    th.sorting_asc::before{
+        display: none!important;
+    }
+
+    th.sorting_asc::after{
+        display: none!important;
+    }
+    th.sorting::before{
+        display: none!important;
+    }
+
+    th.sorting::after{
+        display: none!important;
     }
 
     #main-item {
@@ -75,6 +131,7 @@
         color: rgba(255, 255, 255, 1);
         padding-left: 24px;
         padding-right: 24px;
+        cursor: pointer;
     }
 
     #money {
@@ -156,6 +213,7 @@
             $("#myTable").dataTable();
         }
     })
+    
 </script>
 
 </html>
