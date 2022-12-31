@@ -198,17 +198,21 @@
             var data = preload["results"];
             var crypto = '';
             for (var i = 1; i < data.length; i++) {
-                crypto += `<tr id="main-item"><td id='money'>
-                <div id="image"><img src='${data[i].image}'></div>
-                <div id="item">  
-                <div id="name">${data[i].name}</div>
-                <div id="symbol">${data[i].symbol}</div>
-                </div>
-                </td>
-                <td id='currency'>
-                    <div id="market-cap">${data[i].market_cap}</div>
-                    </td></tr>`
+                crypto += `
+                <tr id="main-item" onclick="window.location='btc.html';">
+                        <td id='money'>
+                            <div id="image"><img src='${data[i].image}'></div>
+                            <div id="item">  
+                            <div id="name">${data[i].name}</div>
+                            <div id="symbol">${data[i].symbol}</div>
+                            </div>
+                        </td>
+                        <td id='currency'>
+                            <div id="market-cap">${data[i].market_cap}</div>
+                        </td>    
+                    </tr>`
             }
+            console.log(crypto);
             $("#main").html(crypto)
             $("#myTable").dataTable();
         }
