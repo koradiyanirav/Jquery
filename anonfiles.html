@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="jquery-3.6.1.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Anonfiles</title>
+</head>
+<body>
+    <div id="content">
+        <form method="post" id="form">
+            <input type="file" id="file">
+            <button id="submit">Upload</button>
+        </form>
+    </div>
+</body>
+<script>
+    var form = $("#form");
+    form.submit(function(e){
+        e.preventDefault();
+        var formData = new FormData();
+        var file = $("#file").prop('files')[0];
+        formData.append("file", file, file.name);
+        // console.log(formData);
+        $.ajax({
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            url: "https://api.anonfiles.com/upload",
+            success: function(data){
+                var link = data['data']['file']['url']['full']
+                Swal.fire(
+                    'Success!',
+                    link,
+                    'success'
+                )
+            },
+            error: function(error){
+                console.log(error.responseJSON)
+            },
+        })
+    })
+</script>
+</html>

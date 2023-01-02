@@ -12,11 +12,128 @@
     <title>Discover</title>
 </head>
 <style>
+    * {
+        box-sizing: border-box;
+        border: 0 solid #e2e8f0;
+    }
+
     body {
         margin: 0px;
         padding: 0px;
         font-family: Source Sans Pro, sans-serif;
         background-color: rgba(56, 58, 71, 1);
+    }
+
+    .nav {
+        top: 0;
+        position: sticky;
+        z-index: 2;
+        height: 64px;
+        background-color: rgba(56, 105, 232, 1);
+        display: flex;
+        justify-content: center;
+    }
+
+    .nav_item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 84.39%;
+    }
+
+    .nav_img {
+        height: 36px;
+        width: 113px;
+    }
+
+    .nav_content {
+        display: flex;
+    }
+
+    .nav_a {
+        text-decoration: none;
+        font-weight: 500;
+        padding: 9px 24px;
+        color: rgba(255, 255, 255, 1);
+        line-height: 24px;
+    }
+
+    .nav_a:hover {
+        background-color: rgba(0, 0%, 100%, .1);
+        border-radius: 4px;
+    }
+
+    .section {
+        background-color: rgba(36, 37, 46, 1);
+        width: 100%;
+    }
+
+    .section_item {
+        height: 100%;
+        padding: 80px 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .section_heder {
+        font-size: 39.2px;
+        font-weight: 600;
+        line-height: 58.8px;
+        margin: 0px 0px 40px 0px;
+        color: rgba(255, 255, 255, 1);
+    }
+
+    .section_form {
+        position: relative;
+        width: 500px;
+        margin: auto;
+    }
+
+    .search[type=text] {
+        width: 100%;
+        height: 63px;
+        border: 1px solid rgb(71, 73, 92);
+        background-color: rgb(36, 37, 46);
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 300;
+        padding: 0px 40px 0px 48px;
+        color: white;
+        -webkit-transition: 0.5s;
+        transition: 0.5s;
+        outline: none;
+    }
+
+    .search[type=text]:focus {
+        border: 1px solid rgb(56, 105, 232) !important;
+    }
+
+    .search_logo {
+        position: absolute;
+        top: 22.047px;
+        left: 19px;
+        height: 15px;
+        line-height: 24px;
+    }
+
+    .svg_search {
+        height: 20px;
+        width: 20px;
+    }
+
+    .clear_logo {
+        position: absolute;
+        top: 22.047px;
+        right: 15px;
+        height: 15px;
+        line-height: 24px;
+    }
+
+    .svg_clear {
+        height: 20px;
+        width: 20px;
     }
 
     #contenier {
@@ -59,43 +176,43 @@
         width: 100%;
     }
 
-    #myTable_length{
+    #myTable_length {
         color: rgba(152, 163, 198, 1);
-        font-weight: 300!important;
+        font-weight: 300 !important;
         font-size: 14px;
         line-height: 21px;
         padding-top: 20px;
     }
-    
-    #myTable_filter{
+
+    #myTable_filter {
         color: rgba(152, 163, 198, 1);
         padding-top: 20px;
         line-height: 21px;
-        font-weight: 300!important;
+        font-weight: 300 !important;
         font-size: 14px;
     }
 
-    #myTable_info{
+    #myTable_info {
         color: rgba(152, 163, 198, 1);
         padding-top: 20px;
         line-height: 21px;
-        font-weight: 300!important;
+        font-weight: 300 !important;
         font-size: 14px;
     }
 
-    #myTable_paginate{
+    #myTable_paginate {
         color: rgba(152, 163, 198, 1);
         padding-top: 20px;
         line-height: 21px;
-        font-weight: 300!important;
+        font-weight: 300 !important;
         font-size: 14px;
     }
 
-    .paginate_button:hover{
-        background: linear-gradient(90deg,#57596b,#47495c)!important;
+    .paginate_button:hover {
+        background: linear-gradient(90deg, #57596b, #47495c) !important;
     }
-    
-    select{
+
+    select {
         color: rgba(152, 163, 198, 1);
     }
 
@@ -105,19 +222,20 @@
         border: none;
     }
 
-    th.sorting_asc::before{
-        display: none!important;
+    th.sorting_asc::before {
+        display: none !important;
     }
 
-    th.sorting_asc::after{
-        display: none!important;
-    }
-    th.sorting::before{
-        display: none!important;
+    th.sorting_asc::after {
+        display: none !important;
     }
 
-    th.sorting::after{
-        display: none!important;
+    th.sorting::before {
+        display: none !important;
+    }
+
+    th.sorting::after {
+        display: none !important;
     }
 
     #main-item {
@@ -174,6 +292,34 @@
 </style>
 
 <body>
+    <div class="nav">
+        <div class="nav_item">
+            <a href="#">
+                <img src="exwherelogo.svg" class="nav_img">
+            </a>
+            <div class="nav_content">
+                <a href="#" class="nav_a">Home</a>
+                <a href="#" class="nav_a">Crypto Compare</a>
+                <a href="#" class="nav_a">Crypto Converter</a>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="section_item">
+            <div class="section_heder">Discover where to buy cryptos</div>
+            <form class="form">
+                <div class="section_form">
+                    <input type="text" class="search" placeholder="Search by name or symbol">
+                    <div class="search_logo">
+                        <img src="exwheresearch.svg" class="svg_search">
+                    </div>
+                    <div class="clear_logo">
+                        <img src="exwhereclear.svg" class="svg_clear">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
     <div id="contenier">
         <div id="contain">
             <p id="contain-item">Top Cryptos by Marketcap</p>
@@ -191,6 +337,10 @@
     </div>
 </body>
 <script>
+    $(".svg_clear").on("click", function () {
+        $('.form')[0].reset();
+    });
+
     $.ajax({
         type: "get",
         url: "https://api.exwhere.com/coins/",
@@ -217,7 +367,7 @@
             $("#myTable").dataTable();
         }
     })
-    
+
 </script>
 
 </html>
