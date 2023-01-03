@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery-3.6.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<style>
+    li {
+        list-style: none;
+        cursor: pointer;
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    .fa-trash-o{
+        padding-left: 10px;
+        color: red;
+        font-size: 20px;
+    }
+    
+
+    .lol2{
+        display: none;
+    }
+
+    .checkbox{
+        text-decoration: line-through;
+    }
+</style>
+
+<body>
+    <form>
+        <input type="text" id="text" name="listitem">
+        <span id="submit">Add</span>
+    </form>
+    <ul></ul>
+</body>
+<script>
+    $(document).ready(function () {
+        $("#submit").click(function () {
+            let text = $('input[name=listitem]').val();
+            $("ul").append('<li class="lol"> <input type="checkbox" class="check">' + text + '<i class="fa fa-trash-o"></i> </li>');
+        })
+
+        $('ul').on('click','.check',function(){
+            $(this).parent('.lol').toggleClass('checkbox')
+        })
+
+        $('ul').on("click",".fa-trash-o",function(){
+            $(this).parent('.lol').addClass("lol2")
+        });
+    });
+</script>
+
+</html>

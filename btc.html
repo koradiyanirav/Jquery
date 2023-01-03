@@ -9,7 +9,13 @@
     <title>Where to Buy Bitcoin (BTC) | Bitcoin Price History | Exwhere</title>
 </head>
 <style>
+    * {
+        box-sizing: border-box;
+        border: 0 solid #e2e8f0;
+    }
+
     body {
+        overflow-x: hidden;
         margin: 0;
         padding: 0;
         background-color: rgba(56, 58, 71, 1);
@@ -17,8 +23,162 @@
         color: white;
     }
 
+    .nav {
+        top: 0;
+        position: sticky;
+        z-index: 2;
+        height: 64px;
+        background-color: rgba(56, 105, 232, 1);
+        display: flex;
+        justify-content: center;
+        width: 100vw;
+        padding-right: 20px;
+    }
+
+    .nav_item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 1121.66px;
+        line-height: 24px;
+    }
+
+    .nav_item_a {
+        display: flex;
+    }
+
+    .nav_img {
+        height: 36px;
+        width: 113px;
+    }
+
+    .nav_content {
+        display: flex;
+        align-items: center;
+    }
+
+    .nav_a {
+        text-decoration: none;
+        font-weight: 500;
+        padding: 9px 24px;
+        color: rgba(255, 255, 255, 1);
+        line-height: 24px;
+    }
+
+    .nav_a:hover {
+        background-color: rgba(0, 0%, 100%, .1);
+        border-radius: 4px;
+    }
+
+    .nav_filter {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid rgba(136, 167, 246, 1);
+        border-radius: 50rem;
+        padding: 12px 16px;
+        margin-left: 24px;
+        text-decoration: none;
+        color: white;
+    }
+
+    .svg_filter {
+        margin-right: 8px;
+        width: 23px;
+    }
+
+    .filter_a {
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .section {
+        background-color: rgba(36, 37, 46, 1);
+        width: 100%;
+    }
+
+    .section_item {
+        padding: 40px 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .section_form {
+        position: relative;
+        width: 500px;
+        margin: auto;
+    }
+
+    .search[type=text] {
+        width: 100%;
+        height: 63px;
+        border: 1px solid rgb(71, 73, 92);
+        background-color: rgb(36, 37, 46);
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 300;
+        padding: 0px 40px 0px 48px;
+        color: white;
+        -webkit-transition: 0.5s;
+        transition: 0.5s;
+        outline: none;
+    }
+
+    .search::placeholder {
+        color: #98a3c6 !important;
+    }
+
+    .search[type=text]:focus {
+        border: 1px solid rgb(56, 105, 232) !important;
+    }
+
+    .search_logo {
+        position: absolute;
+        top: 22.047px;
+        left: 19px;
+        height: 15px;
+        line-height: 24px;
+    }
+
+    .svg_search {
+        height: 20px;
+        width: 20px;
+    }
+
+    .clear_logo {
+        position: absolute;
+        top: 22.047px;
+        right: 15px;
+        height: 15px;
+        line-height: 24px;
+    }
+
+    .svg_clear {
+        height: 16px;
+        width: 16px;
+        cursor: pointer;
+    }
+
+    #contenier {
+        width: 75% !important;
+        margin: auto !important;
+    }
+
+    #myTable {
+        width: 100%;
+    }
+
+    #contain {
+        font-weight: 400;
+        padding-top: 48px;
+        color: rgba(255, 255, 255, 1);
+        font-size: 24px;
+    }
+
     #btc_container {
-        width: 75%;
+        width: 83.33%;
         margin: auto;
         line-height: 24px;
         font-size: 15.2px;
@@ -33,7 +193,7 @@
         color: rgba(255, 255, 255, 1);
     }
 
-    #btc_item_one:hover{
+    #btc_item_one:hover {
         color: #8dadfc;
     }
 
@@ -74,14 +234,15 @@
         color: rgba(152, 163, 198, 1);
     }
 
-    #bitcoin_bar, th{
+    #bitcoin_bar,
+    th {
         font-weight: 300;
     }
 
     #btc_table_item {
         display: block;
     }
-    
+
     #bitCoin {
         background-color: rgba(64, 66, 79, 1);
         display: flex;
@@ -90,22 +251,18 @@
         padding-left: 24px;
         padding-right: 24px;
         height: 80px;
-        border-bottom: 1px solid rgba(71,73,92,1);
+        border-bottom: 1px solid rgba(71, 73, 92, 1);
         cursor: pointer;
     }
 
-    #bitCoin:hover{
-        background: linear-gradient(90deg,#57596b,#47495c);
+    #bitCoin:hover {
+        background: linear-gradient(90deg, #57596b, #47495c);
     }
 
-    #Bitcoin{
+    #Bitcoin {
         display: flex;
         align-items: center;
         width: 33.333%;
-    }
-
-    div:nth-child(1){
-        margin-right: 16px;
     }
 
     #btc_symbol {
@@ -113,17 +270,17 @@
         text-align: center;
         font-size: 14px;
         line-height: 21px;
-        color: rgba(141,173,252, 1);
+        color: rgba(141, 173, 252, 1);
     }
 
-    #btc_volume{
+    #btc_volume {
         font-size: 14px;
         line-height: 21px;
         width: 33.333%;
         text-align: right;
     }
 
-    #btc_image{
+    #btc_image {
         border-radius: 50%;
         width: 24px;
         height: 24px;
@@ -133,10 +290,40 @@
         font-weight: 300;
         line-height: 21px;
     }
-
 </style>
 
 <body>
+    <div class="nav">
+        <div class="nav_item">
+            <a href="#" class="nav_item_a">
+                <img src="exwherelogo.svg" class="nav_img">
+            </a>
+            <div class="nav_content">
+                <a href="#" class="nav_a">Home</a>
+                <a href="#" class="nav_a">Crypto Compare</a>
+                <a href="#" class="nav_a">Crypto Converter</a>
+                <a href="#" class="nav_filter">
+                    <img src="exwherefilter.svg" class="svg_filter">
+                    <div class="filter_a">FILTER BY</div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="section_item">
+            <form class="form">
+                <div class="section_form">
+                    <input type="text" class="search" id="Search" placeholder="Search by name or symbol">
+                    <div class="search_logo">
+                        <img src="exwheresearch.svg" class="svg_search">
+                    </div>
+                    <div class="clear_logo">
+                        <img src="exwhereclear.svg" class="svg_clear">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
     <div id="btc_container">
         <div id="btc">
             <a href="exwhere.html" id="btc_item_one">home</a>
@@ -159,6 +346,27 @@
 
 </body>
 <script>
+    $(".clear_logo").on("click", function () {
+        $('.form')[0].reset();
+    });
+
+    var resetb = document.querySelector(".svg_clear");
+    var offcansearch = document.querySelector('.search');
+
+    offcansearch.addEventListener('keyup', function () {
+        var searchSminput = offcansearch.value.length;
+        if (searchSminput == 0) {
+            resetb.style.display = "none";
+        } else {
+            resetb.style.display = "block";
+        }
+    });
+
+    resetb.addEventListener('click', function () {
+        resetb.style.display = "none";
+        offcansearch.focus();
+    });
+
     $.ajax({
         type: "get",
         url: "https://api.exwhere.com/crypto/?skip=0&limit=25&symbol=btc",

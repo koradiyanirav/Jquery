@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap css -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Our css -->
+    <link rel="stylesheet" href="style.css">
+    <title>Emails View</title>
+</head>
+<style>
+    input[type="search"] {
+        border: 1px solid gray;
+        padding: .2em .4em;
+        border-radius: .2em;
+    }
+
+    input[type="search"].dark {
+        background: #222;
+        color: #fff;
+    }
+
+    input[type="search"].light {
+        background: #fff;
+        color: #222;
+    }
+
+    input[type="search"]::-webkit-search-cancel-button {
+        -webkit-appearance: none;
+        height: 1em;
+        width: 1em;
+        margin-left: .5em;
+        border-radius: 50em;
+        background: url(https://pro.fontawesome.com/releases/v5.10.0/svgs/solid/times-circle.svg) no-repeat 50% 50%;
+        background-size: contain;
+        display: none;
+        pointer-events: none;
+    }
+
+    input[type="search"]:focus::-webkit-search-cancel-button {
+        display: block;
+        pointer-events: all;
+    }
+
+    input[type="search"].dark::-webkit-search-cancel-button {
+        filter: invert(1);
+    }
+</style>
+
+<body>
+    <input type="search" placeholder="search" class="light">
+    <input type="search" placeholder="search" class="dark">
+</body>
+
+</html>

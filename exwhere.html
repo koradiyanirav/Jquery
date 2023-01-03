@@ -38,7 +38,12 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        width: 84.39%;
+        width: 1121.66px;
+        line-height: 24px;
+    }
+
+    .nav_item_a{
+        display: flex;
     }
 
     .nav_img {
@@ -106,6 +111,10 @@
         outline: none;
     }
 
+    .search::placeholder{
+        color: #98a3c6!important;
+    }
+
     .search[type=text]:focus {
         border: 1px solid rgb(56, 105, 232) !important;
     }
@@ -134,6 +143,7 @@
     .svg_clear {
         height: 16px;
         width: 16px;
+        cursor: pointer;
     }
 
     #contenier {
@@ -147,7 +157,7 @@
 
     #contain {
         font-weight: 400;
-        padding-top: 20px;
+        padding-top: 48px;
         color: rgba(255, 255, 255, 1);
         font-size: 24px;
     }
@@ -184,7 +194,13 @@
         padding-top: 20px;
     }
 
+    .dataTables_length{
+        display: none;
+    }
+    
+
     #myTable_filter {
+        display: none;
         color: rgba(152, 163, 198, 1);
         padding-top: 20px;
         line-height: 21px;
@@ -294,7 +310,7 @@
 <body>
     <div class="nav">
         <div class="nav_item">
-            <a href="#">
+            <a href="#" class="nav_item_a">
                 <img src="exwherelogo.svg" class="nav_img">
             </a>
             <div class="nav_content">
@@ -309,7 +325,7 @@
             <div class="section_heder">Discover where to buy cryptos</div>
             <form class="form">
                 <div class="section_form">
-                    <input type="text" class="search" placeholder="Search by name or symbol">
+                    <input type="text" class="search" id="Search" placeholder="Search by name or symbol">
                     <div class="search_logo">
                         <img src="exwheresearch.svg" class="svg_search">
                     </div>
@@ -337,8 +353,25 @@
     </div>
 </body>
 <script>
-    $(".svg_clear").on("click", function () {
+    $(".clear_logo").on("click", function () {
         $('.form')[0].reset();
+    });
+
+    var resetb = document.querySelector(".svg_clear");
+    var offcansearch = document.querySelector('.search');
+
+    offcansearch.addEventListener('keyup', function () {
+        var searchSminput = offcansearch.value.length;
+        if (searchSminput == 0) {
+            resetb.style.display = "none";
+        } else {
+            resetb.style.display = "block";
+        }
+    });
+
+    resetb.addEventListener('click', function () {
+        resetb.style.display = "none";
+        offcansearch.focus();
     });
 
     $.ajax({
