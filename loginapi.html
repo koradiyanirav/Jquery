@@ -21,7 +21,7 @@
         margin-top: 10px;
     }
 
-    .lol {
+    .remove {
         display: none !important;
     }
 
@@ -61,14 +61,14 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-right: 2px;
+        margin: 10px;
     }
 
     .main1 {
         display: none;
     }
 
-    .deleteUser,
+    .deletePost,
     .EditUser {
         width: 45px;
         height: 30px;
@@ -115,6 +115,7 @@
     var users = [];
     var posts = [];
     $(document).ready(function () {
+        
         $.ajax({
             type: 'get',
             url: 'https://jsonplaceholder.typicode.com/posts/',
@@ -122,6 +123,7 @@
                 posts = preload
             },
         });
+
         $.ajax({
             type: 'get',
             url: 'https://jsonplaceholder.typicode.com/users/',
@@ -132,27 +134,30 @@
     });
 
     // setTimeout(() => {
-    //     // console.log(posts);
-    // }, 2000)
+        // console.log(posts);
+    // }, 2000);
     // setTimeout(() => {
-    //     // console.log(users);
-    // }, 2000)
+        // console.log(users);
+    // }, 2000);
 
     setTimeout(() => {
         for (var i = 0; i < posts.length; i++) {
             // console.log(posts[i]);
+            // console.log(posts[i]['id']);
             for (var j = 0; j < users.length; j++) {
+                // console.log(users[j]);
+                // console.log(users[j]['id']);
                 if (posts[i]['userId'] == users[j]['id']) {
                     posts[i]['username'] = users[j]['username']
                     posts[i]['name'] = users[j]['name']
                 };
-            }
+            };
         };
 
-        // console.log(posts)
+        // console.log(posts);
         var userItem = '';
         for (var k = 0; k < posts.length; k++) {
-            // console.log(posts[k])
+            // console.log(posts[k]);
             userItem += `
             <div class="content">
                 <div class="main">
@@ -162,30 +167,29 @@
                         <div class="item1"><a href="#">${posts[k].name}</a></div>
                         <div class="item2"><a href="#">@${posts[k].username}</a></div>
                         <div class="item" id="${posts[k].id}">
-                        <div class="title">Title: ${posts[k].title}
+                        <div class="title">${posts[k].title}
                         </div>
                         <div class="body">${posts[k].body}</div>
                         </div>
                         </div>
                     </div>
                 <button class="EditUser" onclick="editUser(${posts[k].id})">Edit</button>
-                <button class="deleteUser">delete</button>
+                <button class="deletePost">delete</button>
             </div>
                     `
             // console.log(userItem);
         }
         $('#orders').html(userItem);
 
-        $('#orders').on('click', '.deleteUser', function () {
-            $(this).parent('.content').addClass('lol');
-        });
+        $('#orders').on('click', '.deletePost', function () {
+            $(this).parent('.content').addClass('remove');
+        }); //user post remove karva mate
 
-        $('.main').each(function () {
+        $('.main').each(function () {  //word mathi first letter leva mate
             let FirstLetter = $(this).find('.main1').text();
-            let Letters = FirstLetter.charAt(0)
+            let Letters = FirstLetter.charAt(0);
             $(this).find('.main3').text(Letters);
-        })
-
+        });
 
     }, 3000);
 
@@ -194,14 +198,12 @@
             type: "get",
             url: "https://jsonplaceholder.typicode.com/posts/" + id,
             success: function (data) {
-                // console.log("success:", data)
+                // console.log("success:", data);
                 form = ` <form id="editForm" onsubmit="return false"> 
                     <div class="item3">
-                        <label for="Title" class="Title">Title:</label>
                         <input type="text" id="Title" class="Title" value="${data.title}">
                     </div>
                     <div class="item3">
-                        <label for="Body" class="Body">Body:</label>
                         <input type="text" id="Body" class="Body" value="${data.body}">
                     </div>
                     <input type="submit" onclick="formSubmit(${data.id})">
@@ -209,33 +211,33 @@
                 formdata = $('#' + id).html(form);
             },
             error: function (error) {
-                console.log(error.responseJSON)
+                console.log(error.responseJSON);
             },
-        })
-    }
+        });
+    };
 
     function formSubmit(id) {
         var FormData = {
             title: $("#Title").val(),
             body: $("#Body").val(),
-        }
-        // console.log(FormData)
+        };
+        // console.log(FormData);
         $.ajax({
             type: "patch",
             data: FormData,
             url: "https://jsonplaceholder.typicode.com/posts/" + id,
             success: function (preload) {
                 tt = `<div class="item" id="${preload.id}">
-                        <div class="title">Title: ${preload.title}
+                        <div class="title">${preload.title}
                         </div>
-                        <div class="body">Body: ${preload.body}</div>
+                        <div class="body">${preload.body}</div>
                   </div>
                        `
-                // console.log(preload)
+                // console.log(preload);
                 formdata = $('#' + id).html(tt);
-            }
-        })
-    }
+            },
+        });
+    };
 </script>
 
 </html>
