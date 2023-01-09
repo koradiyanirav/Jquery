@@ -198,16 +198,19 @@
             url: "https://jsonplaceholder.typicode.com/posts/" + id,
             success: function (data) {
                 // console.log("success:", data);
-                form = ` <form id="editForm" onsubmit="return false"> 
-                    <div class="item3">
-                        <input type="text" id="Title" class="Title" value="${data.title}">
-                    </div>
-                    <div class="item3">
-                        <input type="text" id="Body" class="Body" value="${data.body}">
-                    </div>
-                    <input type="submit" onclick="formSubmit(${data.id})">
-                </form>`
+                form = ` 
+                            <form id="editForm" onsubmit="return false"> 
+                                <div class="item3">
+                                    <input type="text" id="Title" class="Title" value="${data.title}">
+                                </div>
+                                <div class="item3">
+                                    <input type="text" id="Body" class="Body" value="${data.body}">
+                                </div>
+                                <input type="submit" onclick="formSubmit(${data.id})">
+                            </form>
+                        `
                 formdata = $('#' + id).html(form);
+                console.log(formdata);
             },
             error: function (error) {
                 console.log(error.responseJSON);
