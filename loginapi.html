@@ -106,7 +106,6 @@
 
 <body>
 
-
     <div id="orders">
     </div>
 
@@ -227,12 +226,13 @@
             data: FormData,
             url: "https://jsonplaceholder.typicode.com/posts/" + id,
             success: function (preload) {
-                tt = `<div class="item" id="${preload.id}">
-                        <div class="title">${preload.title}
+                tt = `
+                        <div class="item" id="${preload.id}">
+                                <div class="title">${preload.title}
+                                </div>
+                                <div class="body">${preload.body}</div>
                         </div>
-                        <div class="body">${preload.body}</div>
-                  </div>
-                       `
+                      `
                 // console.log(preload);
                 formdata = $('#' + id).html(tt);
             },
