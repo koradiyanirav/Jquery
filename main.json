@@ -1,0 +1,50 @@
+{
+  "countries": [
+    {
+      "id": 1,
+      "name": "Country 1",
+      "states": [
+        {
+          "id": 101,
+          "name": "State 1.1",
+          "cities": [
+            {
+              "id": 1001,
+              "name": "City 1.1.1"
+            },
+            {
+              "id": 1002,
+              "name": "City 1.1.2"
+            }
+          ]
+        },
+        {
+          "id": 102,
+          "name": "State 1.2",
+          "cities": [
+            {
+              "id": 1003,
+              "name": "City 1.2.1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Country 2",
+      "states": [
+        {
+          "id": 201,
+          "name": "State 2.1",
+          "cities": [
+            {
+              "id": 2001,
+              "name": "City 2.1.1"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

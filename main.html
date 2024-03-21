@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>API Dropdown</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <select id="myDropdown">
+        <option value="">Select an option</option>
+    </select>
+</body>
+<script>
+    $(document).ready(function () {
+        // API URL (replace with your API URL)
+        // var apiURL = "https://api.wordswan.com/categories";
+
+        // Dropdown element
+        // var $dropdown = $("#myDropdown");
+
+        // Make an AJAX GET request to the API
+        // $.get(apiURL, function (data) {
+        // Map the array into options and append them to the dropdown
+        //       var options = data.data.map(function (item) {
+        //         console.log(item);
+        //       return $("<option>").text(item.slug).val(item.id);
+        // });
+
+        // Append the options to the dropdown
+        // $dropdown.append(options);
+
+        // });
+        $.ajax({
+            type: 'get',
+            url: 'https://api.wordswan.com/categories',
+            success: function (data) {
+                console.log(data.data)
+            }, error: function (error) {
+                console.log(error.responseJSON);
+            },
+        })
+    });
+</script>
+
+</html>

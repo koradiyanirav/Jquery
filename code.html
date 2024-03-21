@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dependent Dropdown Example</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<style>
+    .csda{
+        text-transform: capitalize;
+    }
+</style>
+
+<body>
+    <label for="category">Category:</label>
+    <select id="category" name="category">
+        <option value="">Select a category</option>
+    </select>
+
+    <label for="subcategory">Subcategory:</label>
+    <select id="subcategory" name="subcategory">
+        <option value="">Select a subcategory</option>
+    </select>
+
+    <script>
+        $(document).ready(function () {
+            // Fetch categories from the API
+            $.ajax({
+                type: 'get',
+                url: 'https://api.wordswan.com/categories',
+                success: function (data) {
+                    var categories = data.data;
+
+                    // Populate the category dropdown
+                    var $categoryDropdown = $("#category");
+                    categories.forEach(function (category) {
+                        $categoryDropdown.append($('<option class="csda">').val(category.id).text(category.title));
+                    });
+
+                    // Bind the change event to the category dropdown
+                    $categoryDropdown.on('change', function () {
+                        var selectedCategoryId = $(this).val();
+
+                        // Fetch subcategories based on the selected category
+                        $.ajax({
+                            type: 'get',
+                            url: 'https://api.wordswan.com/categories/',
+                            success: function (data) {
+                                var subcategories = data.data;
+                                console.log(subcategories)
+
+                                // Populate the subcategory dropdown
+                                var $subcategoryDropdown = $("#subcategory");
+                                $subcategoryDropdown.empty(); // Clear previous options
+                                $subcategoryDropdown.append($('<option>').val(subcategories.id).text(subcategories.title)); // Add a default option
+                                subcategories.forEach(function (subcategory) {
+                                    $subcategoryDropdown.append($('<option>').val(subcategory.id).text(subcategory.title));
+                                });
+                            },
+                            error: function (error) {
+                                console.log(error.responseJSON);
+                            }
+                        });
+                    });
+                },
+                error: function (error) {
+                    console.log(error.responseJSON);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

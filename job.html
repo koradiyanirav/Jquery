@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shorten Text Example</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+        /* Adjust as needed */
+        .short-text {
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="text-container">
+        <p class="short-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec justo ut libero aliquam auctor. Integer eget massa id justo laoreet tristique. Proin in elit quis libero vulputate bibendum ac sit amet libero. Sed et euismod leo. Nam nec eleifend tortor. Quisque non justo ac elit placerat volutpat a et justo. Suspendisse potenti. Sed tincidunt, leo a venenatis fringilla, felis felis interdum urna, eu interdum neque sapien ut nisi. Vivamus ac justo eu est efficitur fermentum in vel mi. Nullam nec felis a nisl vehicula varius vel a tellus. Vivamus eget dui ex. Etiam suscipit felis id justo fringilla, ac consequat justo viverra. Aenean in sagittis nisl, vitae congue neque. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, modi a temporibus quam maxime voluptatem magni blanditiis nesciunt voluptatum tempore consequatur voluptate optio eius perspiciatis quas soluta laborum natus sint ea pariatur corporis inventore. Provident nihil asperiores fuga. Ut exercitationem dolores culpa labore minus voluptatibus at laborum est accusamus. Iure explicabo libero dolorum tempora sed tempore perferendis delectus, quasi, velit cum voluptatem dolor. Ullam, dolorem nulla. Fuga voluptatem repellat, molestiae pariatur eius cum modi consequatur natus, qui ea quod quos.
+        </p>
+        <a href="#" class="show-more">Show More</a>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var $textContainer = $('.text-container');
+            var $text = $textContainer.find('.short-text');
+            var $showMoreLink = $textContainer.find('.show-more');
+
+            $showMoreLink.click(function (e) {
+                e.preventDefault();
+                $text.toggleClass('short-text');
+                $showMoreLink.text($text.hasClass('short-text') ? 'Show More' : 'Show Less');
+            });
+        });
+    </script>
+</body>
+</html>
